@@ -1,4 +1,4 @@
-class Region
+class Denomination
   include DataMapper::Resource
 
   property :id, Serial
@@ -7,5 +7,5 @@ class Region
   has n, :wine_sources
   has n, :wines
 
-  has n, :denominations, :through => :wine_sources
+  has n, :regions, :through => :wine_sources
 end
