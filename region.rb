@@ -4,8 +4,7 @@ class Region
   property :id, Serial
   property :name, String
 
-  has n, :wine_sources
   has n, :wines
 
-  has n, :denominations, :through => :wine_sources
+  has n, :denominations, :through => :wines
 end

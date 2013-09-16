@@ -5,12 +5,9 @@ require 'ap'
 require 'data_mapper'
 require 'sqlite3'
 
-require './wine_source'
 require './wine_region'
 require './region_cluster'
-require './region'
-require './denomination'
-require './wine'
+require './models'
 
 REGIONS_IDS = (184..203).to_a << 97
 
@@ -21,15 +18,12 @@ REGIONS_IDS.each do |region_id|
   regions << WineRegion.new(source)
 end
 
-DataMapper::Logger.new($stdout, :debug)
-DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/denominations.sqlite3")
-DataMapper.finalize
 DataMapper.auto_migrate!
 
 regions.regions.each do |region|
   region.denominations.each do |denomination, wines|
     wines.each do |wine, link|
-      source = WineSource.new(
+      source = Wine.new(
         :region => Region.first_or_create(:name => region.name),
         :denomination => Denomination.first_or_create(:name => denomination),
         :name => wine,

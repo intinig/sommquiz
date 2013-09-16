@@ -5,18 +5,17 @@ require 'ap'
 require 'data_mapper'
 require 'sqlite3'
 
-require './wine_region'
-require './region_cluster'
-require './wine_source'
+require './models'
 
-# DataMapper::Logger.new($stdout, :debug)
-DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/denominations.sqlite3")
-DataMapper.finalize
 DataMapper.auto_upgrade!
 
-WineSource.docg.each do |wine|
+Wine.all.each do |wine|
   source = Nokogiri::HTML(open(wine.link))
   source.css("div.art-article h4").each do |e|
-    ap wine.name + " -- " + e.next_element.content if e.content =~ /Vitigni/
+    if e.content =~ /Vitigni/
+      wine.grapes = e.next_element.content
+      wine.save!
+      ap "Updated #{wine.stripped_name}"
+    end
   end
 end
