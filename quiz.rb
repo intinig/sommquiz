@@ -20,6 +20,7 @@ class Quiz
 
   def self.region_question(n = 1)
     wines = Wine.all.sample(n)
+    questions = []
     wines.each do |wine|
       results = Region.all(:name.not => wine.region.name).sample(3).map do |region|
         {"option" => region.name, "correct" => false}
