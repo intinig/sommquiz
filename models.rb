@@ -1,3 +1,5 @@
+require 'data_mapper'
+
 require './wine'
 require './denomination'
 require './region'

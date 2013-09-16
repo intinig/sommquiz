@@ -1,13 +1,24 @@
 require 'rubygems'
 require 'ap'
-require 'data_mapper'
 
 require './models'
 
 
 class Quiz
+  def sample_wines(n, exclude = ["IGP"])
+    wines = Wine.all(:denomination => Denomination.all(:name.not => exclude)).sample(n)
+    wines.each do |wine|
+      wines.delete(wine) if wine.name =~ /#{wine.region.name}/i
+    end
+
+    if wines.size < n
+      wines << sample_wines(n - wines.size, exclude)
+    end
+
+    wines.flatten
+  end
+
   def self.region_question(n = 1)
-    questions = []
     wines = Wine.all.sample(n)
     wines.each do |wine|
       results = Region.all(:name.not => wine.region.name).sample(3).map do |region|
