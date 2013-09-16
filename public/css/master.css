@@ -221,3 +221,7 @@ header {
 ul.responses li p span {
   padding: 20px 0;
 }
+
+ol.questions, .quizResults {
+  padding: 20px;
+}
