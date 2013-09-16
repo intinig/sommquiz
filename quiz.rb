@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'ap'
 require 'data_mapper'
-require 'sqlite3'
 
 require './models'
 
