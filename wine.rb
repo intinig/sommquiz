@@ -2,8 +2,8 @@ class Wine
   include DataMapper::Resource
 
   property :id, Serial
-  property :name, String
-  property :link, String
+  property :name, String, :length => 255
+  property :link, String, :length => 255
   property :grapes, Text
 
   belongs_to :region
