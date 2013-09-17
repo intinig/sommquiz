@@ -5,10 +5,9 @@ require 'ap'
 require 'data_mapper'
 require 'sqlite3'
 
-require File.join(File.dirname(__FILE__), '/../lib/wine_region')
-require File.join(File.dirname(__FILE__), '/../lib/region_cluster')
-require File.join(File.dirname(__FILE__), '/../lib/models')
-
+require File.join(File.dirname(File.absolute_path(__FILE__)), '/../lib/wine_region')
+require File.join(File.dirname(File.absolute_path(__FILE__)), '/../lib/region_cluster')
+require File.join(File.dirname(File.absolute_path(__FILE__)), '/../lib/models')
 
 REGIONS_IDS = (184..203).to_a << 97
 
