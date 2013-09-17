@@ -10,6 +10,6 @@ Wine.all.each do |wine|
   wine.structured_grapes.each do |g|
     grape = Grape.first :id => g[:gid]
     wine.grapes << grape
-    wine.save
+    wine.save!
   end
 end

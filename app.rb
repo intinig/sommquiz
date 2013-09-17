@@ -9,7 +9,7 @@ require File.join(File.dirname(__FILE__), "/lib/quiz")
 
 get '/question' do
   content_type :json
-  {"questions" => Quiz.grapes_question(10)}.to_json
+  {"questions" => Quiz.random_question(10)}.to_json
 end
 
 get '/' do

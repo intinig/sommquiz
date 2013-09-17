@@ -35,39 +35,66 @@ class Quiz
     new_wines.flatten
   end
 
+  def self.build_question(question, correct_answer, incorrect_answers, correct_message, incorrect_message)
+    results = incorrect_answers.map do |answer|
+      {"option" => answer, "correct" => false}
+    end
+
+    results = (results + [{"option" => correct_answer, "correct" => true}]).shuffle
+
+    {
+      "q" => question,
+      "a" => results,
+      "correct" => correct_message,
+      "incorrect"  => incorrect_message
+    }
+  end
+
   def self.region_question(n = 1)
-    wines = sample_wines(n)
+    wines = sample_wines(n, :denominations => ["DOCG"])
     questions = []
     wines.each do |wine|
-      results = Region.all(:name.not => wine.region.name).sample(3).map do |region|
-        {"option" => region.name, "correct" => false}
-      end
-      results << {"option" => wine.region.name, "correct" => true}
-      questions << {
-        "q" => "In che regione viene prodotto il vino #{wine.name}?",
-        "a" => results.shuffle,
-        "correct" => "<p><span>Corretto!</span></p>",
-        "incorrect" => "<p><span>Sbagliato!</span> Il #{wine.name} viene prodotto in #{wine.region.name}!</p>"
-      }
+      questions << build_question(
+        "In che regione viene prodotto il vino #{wine.name}?",
+        wine.region.name,
+        Region.all(:name.not => wine.region.name).sample(3).map{|r| r.name},
+        "<p><span>Corretto!</span></p>",
+        "<p><span>Sbagliato!</span> Il #{wine.name} viene prodotto nella regione #{wine.region.name}!</p>"
+        )
     end
     questions
   end
 
+  # C'e' un bug: a volte tira fuori una domanda con due risposte uguali
+  # Es. Vermentino di Gallura
   def self.grapes_question(n = 1)
-    wines = sample_wines(n)
+    wines = sample_wines(n, :denominations => ["DOCG"])
     questions = []
     wines.each do |wine|
-      results = Wine.all(:name.not => wine.name, :region => wine.region).sample(3).map do |grapes|
-        {"option" => grapes.split_grapes.join(", "), "correct" => false}
-      end
-      results << {"option" => wine.split_grapes.join(", "), "correct" => true}
-      questions << {
-        "q" => "Con che uve può essere prodotto il vino #{wine.name}?",
-        "a" => results.shuffle,
-        "correct" => "<p><span>Corretto!</span></p>",
-        "incorrect" => "<p><span>Sbagliato!</span> Il #{wine.name} può essere prodotto con #{wine.split_grapes.join(', ')}!</p>"
-      }
+      incorrect_answers = Wine.all(:name.not => wine.name, :region => wine.region, :grapes.not => wine.grapes).map {|w| w.grapes.map {|g| g.name}.join(", ")}.uniq.sample(3)
+      correct_answer = wine.grapes.map {|g| g.name}.join(", ")
+
+      questions << build_question(
+        "Con che uve può essere prodotto il vino #{wine.name}?",
+        correct_answer,
+        incorrect_answers,
+        "<p><span>Corretto!</span></p>",
+        "<p><span>Sbagliato!</span> Il #{wine.name} può essere prodotto con #{correct_answer}!</p>"
+        )
     end
     questions
   end
+
+  def self.random_question(n = 1)
+    questions = []
+    n.times do |i|
+      if rand(2).to_i > 0
+        questions << region_question
+      else
+        questions << grapes_question
+      end
+    end
+    questions.flatten
+  end
+
 end

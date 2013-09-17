@@ -21,4 +21,10 @@ describe Quiz do
   describe "grapes_question" do
 
   end
+
+  describe "region_question" do
+    it "defaults to 1 question" do
+      Quiz.region_question.size == 1
+    end
+  end
 end

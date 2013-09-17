@@ -14,14 +14,24 @@ module SommQuiz
     end
 
     def self.debug_grapes
-      Wine.doc.all.each do |wine|
-        if wine.split_grapes.empty?
+      Wine.docg.all.each do |wine|
+        if wine.split_grapes.empty? || wine.grapes.empty?
           ap wine.id
           ap wine.name
           ap wine.grapes_description
           break
         end
       end
+
+      Wine.doc.all.each do |wine|
+        if wine.split_grapes.empty? || wine.grapes.empty?
+          ap wine.id
+          ap wine.name
+          ap wine.grapes_description
+          break
+        end
+      end
+      "End"
     end
 
     def self.count_wines_with_region_in_their_name
