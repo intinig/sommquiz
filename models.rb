@@ -3,6 +3,7 @@ require 'data_mapper'
 require './wine'
 require './denomination'
 require './region'
+require './grape'
 
 #DataMapper::Logger.new($stdout, :debug)
 

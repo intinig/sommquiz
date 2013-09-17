@@ -20,4 +20,9 @@ class Wine
   def stripped_name
     name.gsub(denomination.name, "").strip
   end
+
+  def split_grapes
+    # select a.id, a.name, b.name from wines a join grapes b on a.grapes like '%' || b.name || '%' where a.id = 441;
+    repository.adapter.select("select a.id, a.name, b.name from wines a join grapes b on a.grapes like '%' || b.name || '%' where a.id = ?", id).map{|g| g.name}
+  end
 end

@@ -7,7 +7,7 @@ require './quiz'
 
 get '/question' do
   content_type :json
-  {"questions" => Quiz.region_question(10)}.to_json
+  {"questions" => Quiz.grapes_question(10)}.to_json
 end
 
 get '/' do
