@@ -16,8 +16,8 @@
             _element = '#' + $element.attr('id'),
 
             defaults = {
-                checkAnswerText:  'Check My Answer!',
-                nextQuestionText: 'Next &raquo;',
+                checkAnswerText:  'Controlla la risposta!',
+                nextQuestionText: 'Prossima domanda &raquo;',
                 backButtonText: '',
                 tryAgainText: '',
                 skipStartButton: false,
@@ -142,6 +142,7 @@
 
                         var questionHTML = $('<li class="' + questionClass +'" id="question' + (count - 1) + '"></li>');
                         questionHTML.append('<div class="' + questionCountClass + '">Question <span class="current">' + count + '</span> of <span class="total">' + questionCount + '</span></div>');
+                        questionHTML.append('<div class="steps"><div class="step' + count + '"> ' + count + '</div> </div>');
                         questionHTML.append('<h3>' + count + '. ' + question.q + '</h3>');
 
                         // Count the number of true values
