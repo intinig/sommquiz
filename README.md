@@ -1,8 +1,9 @@
 To make it run:
 
 1. bundle install
-2. ruby region_scraper.rb
-3. ruby wine_scraper.rb
+2. ruby script/region_scraper.rb
+3. ruby script/grape_scraper.rb
+3. ruby script/wine_scraper.rb
 4. rackup
 
 Notes:
