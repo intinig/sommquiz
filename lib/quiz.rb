@@ -6,17 +6,33 @@ require File.join(File.dirname(__FILE__), "/models")
 
 
 class Quiz
-  def self.sample_wines(n, exclude = ["IGP"])
-    wines = Wine.all(:denomination => Denomination.all(:name.not => exclude)).sample(n)
-    wines.each do |wine|
-      wines.delete(wine) if wine.name =~ /#{wine.region.name}/i
+  def self.sample_wines(n, options = {})
+    denominations = options[:denominations] || ["DOC", "DOCG"]
+    easy_by_region = options[:easy_by_region]
+    excluded_ids = options[:excluded_ids]
+
+    denominations = Denomination.all(:name => denominations)
+    wines = Wine.all(:denomination => denominations, :id.not => excluded_ids)
+
+    n = n > wines.count ? wines.count : n
+
+    wines = wines.sample(n)
+
+    excluded_ids = wines.map {|w| w.id}
+
+    new_wines = wines.dup
+
+    unless easy_by_region
+      wines.each do |wine|
+        new_wines.delete(wine) if wine.name =~ /#{wine.region.name}/i
+      end
     end
 
-    if wines.size < n
-      wines << sample_wines(n - wines.size, exclude)
+    if new_wines.size < n
+      new_wines << sample_wines(n - wines.size, options.merge(:excluded_ids => excluded_ids))
     end
 
-    wines.flatten
+    new_wines.flatten
   end
 
   def self.region_question(n = 1)

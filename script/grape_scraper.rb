@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
@@ -20,3 +21,10 @@ end
 
 fetch_grapes(source, "#Rossi")
 fetch_grapes(source, "#Bianchi")
+
+Grape.create(:name => "Gamba Rossa")
+Grape.create(:name => "Verduno Pelaverga")
+Grape.create(:name => "Casavecchia")
+Grape.create(:name => "Nero di Troia")
+Grape.create(:name => "Girò")
+Grape.create(:name => "Semidano")
