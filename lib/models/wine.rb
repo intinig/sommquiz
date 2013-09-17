@@ -6,10 +6,12 @@ class Wine
   property :id, Serial
   property :name, String, :length => 255
   property :link, String, :length => 255
-  property :grapes, Text
+  property :grapes_description, Text
 
   belongs_to :region
   belongs_to :denomination
+
+  has n, :grapes, :through => Resource
 
   def self.doc(params = {})
     Denomination.first(:name => "DOC").wines.all(params)
@@ -23,8 +25,11 @@ class Wine
     name.gsub(denomination.name, "").strip
   end
 
+  def structured_grapes
+    repository.adapter.select("select a.id as wid, b.id as gid, a.name, b.name from wines a join grapes b on a.grapes_description like '%' || b.name || '%' where a.id = ?", id)
+  end
+
   def split_grapes
-    # select a.id, a.name, b.name from wines a join grapes b on a.grapes like '%' || b.name || '%' where a.id = 441;
-    repository.adapter.select("select a.id, a.name, b.name from wines a join grapes b on a.grapes like '%' || b.name || '%' where a.id = ?", id).map{|g| g.name}
+    structured_grapes.map{|g| g.name}
   end
 end

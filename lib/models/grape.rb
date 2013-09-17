@@ -5,4 +5,6 @@ class Grape
 
   property :id, Serial
   property :name, String, :length => 255
+
+  has n, :wines, :through => Resource
 end

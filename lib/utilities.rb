@@ -16,7 +16,7 @@ def debug_grapes
     if wine.split_grapes.empty?
       ap wine.id
       ap wine.name
-      ap wine.grapes
+      ap wine.grapes_description
       break
     end
   end

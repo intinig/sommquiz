@@ -21,7 +21,7 @@ end
 
 def fetch_grape(wine, element, delimiter, pretend = false)
   if element.content =~ delimiter
-    wine.grapes = build_description(element.next_element)
+    wine.grapes_description = build_description(element.next_element)
     wine.save! unless pretend
     ap wine.grapes if pretend
     ap "[#{pretend ? "pretend" : "updated"}] #{wine.name}"
