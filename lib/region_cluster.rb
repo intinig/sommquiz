@@ -1,4 +1,4 @@
-require './region'
+require File.join(File.dirname(__FILE__), "/models")
 
 class RegionCluster
   attr_accessor :regions

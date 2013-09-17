@@ -1,5 +1,5 @@
 require 'ap'
-require './models'
+require File.join(File.dirname(__FILE__), "/models")
 
 def check_for_grapes
   Wine.docg.all.each do |wine|

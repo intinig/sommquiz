@@ -13,4 +13,8 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'dm-sqlite-adapter'
+  gem 'rspec'
+  gem 'ZenTest'
+  gem 'autotest-growl'
+  gem 'autotest-fsevent'
 end

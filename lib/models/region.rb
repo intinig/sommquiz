@@ -1,3 +1,5 @@
+require 'data_mapper'
+
 class Region
   include DataMapper::Resource
 

@@ -1,3 +1,5 @@
+require 'data_mapper'
+
 class Denomination
   include DataMapper::Resource
 

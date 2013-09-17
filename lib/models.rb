@@ -1,9 +1,10 @@
 require 'data_mapper'
 
-require './wine'
-require './denomination'
-require './region'
-require './grape'
+MODELS_PATH = File.join(File.dirname(__FILE__), "/models")
+
+Dir.glob(MODELS_PATH + "/*.rb").each do |file|
+  require file
+end
 
 #DataMapper::Logger.new($stdout, :debug)
 

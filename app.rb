@@ -1,5 +1,7 @@
 require 'json'
-require './quiz'
+require 'sinatra'
+
+require File.join(File.dirname(__FILE__), "/lib/quiz")
 
 # tipi di domande: doc o docg?
 # regioni

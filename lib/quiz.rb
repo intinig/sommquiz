@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'ap'
 
-require './models'
+require File.join(File.dirname(__FILE__), "/models")
 
 
 class Quiz
