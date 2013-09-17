@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'ap'
 
-require './models'
+require File.join(File.dirname(__FILE__), '/../lib/models')
 
 DataMapper.auto_upgrade!
 

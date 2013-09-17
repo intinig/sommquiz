@@ -5,7 +5,7 @@ require 'ap'
 require 'data_mapper'
 require 'sqlite3'
 
-require './models'
+require File.join(File.dirname(__FILE__), '/../lib/models')
 
 DataMapper.auto_upgrade!
 
