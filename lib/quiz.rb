@@ -70,14 +70,14 @@ class Quiz
   # TODO: reverse questions: Che vino viene fatto con queste uve? Docg di questa regione?
 
   def self.build_grapes_question_with_wine(wine)
-          incorrect_answers = Wine.all(:name.not => wine.name, :region => wine.region, :grapes.not => wine.grapes).map {|w| w.grapes.map {|g| g.name}.join(", ")}.uniq.sample(3)
-      correct_answer = wine.grapes.map {|g| g.name}.join(", ")
+    incorrect_answers = Wine.all(:name.not => wine.name, :grapes.not => wine.grapes, :denomination => wine.denomination).map {|w| w.grapes.map {|g| g.name}.join(", ")}.uniq.sample(3)
+    correct_answer = wine.grapes.map {|g| g.name}.join(", ")
 
     build_question(
-        "Con che uve può essere prodotto il vino #{wine.name}?",
+      "Con che uve può essere prodotto il vino #{wine.name}?",
       correct_answer,
       incorrect_answers,
-        "<p><span>Corretto!</span></p>",
+      "<p><span>Corretto!</span></p>",
       "<p><span>Sbagliato!</span> Il #{wine.name} può essere prodotto con #{correct_answer}!</p>"
       )
   end
