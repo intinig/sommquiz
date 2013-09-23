@@ -6,7 +6,7 @@ Dir.glob(MODELS_PATH + "/*.rb").each do |file|
   require file
 end
 
-DataMapper::Logger.new($stdout, :debug)
+DataMapper::Logger.new(STDOUT, :debug)
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/db/denominations.sqlite3")
 DataMapper.finalize
