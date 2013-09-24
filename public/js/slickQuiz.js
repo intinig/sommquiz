@@ -141,7 +141,7 @@
                         var question = questions[i];
 
                         var questionHTML = $('<li class="' + questionClass +'" id="question' + (count - 1) + '"></li>');
-                        questionHTML.append('<div class="' + questionCountClass + '">Question <span class="current">' + count + '</span> of <span class="total">' + questionCount + '</span></div>');
+                        questionHTML.append('<div class="' + questionCountClass + '">Domanda <span class="current">' + count + '</span> di <span class="total">' + questionCount + '</span></div>');
                         questionHTML.append('<div class="steps"><div class="step' + count + '"> ' + count + '</div> </div>');
                         questionHTML.append('<h3>' + count + '. ' + question.q + '</h3>');
 
