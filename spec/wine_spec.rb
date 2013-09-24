@@ -7,7 +7,8 @@ describe Wine do
       {
         :easy_by_region => true,
         :denominations => ["DOC", "DOCG", "DOP", "IGP"],
-        :grapes_limit => 0
+        :upper_grapes_limit => 0,
+        :lower_grapes_limit => 0
       }.merge(options)
     end
     it "does not bomb out if you ask more wines than possible" do
@@ -28,5 +29,12 @@ describe Wine do
       (easy_wines.size - complex_wines.size).should == SommQuiz::Utilities.count_wines_with_region_in_their_name
     end
 
+    it "always gives a sufficient number of wines" do
+      wines = Wine.random(20,
+        :denominations => ["DOCG", "DOC"],
+        :lower_grapes_limit => 3
+        )
+      wines.size.should == 20
+    end
   end
 end

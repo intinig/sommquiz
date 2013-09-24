@@ -16,6 +16,21 @@ describe Quiz do
     end
   end
 
+  describe "build_reverse_grapes_question_with_wine" do
+    it "should give correct answers" do
+      wines = Wine.random(0, :denominations => ["DOCG", "DOC"])
+      wines = wines.select {|w| w.grapes.size > 3}
+      wines.should_not be_empty
+    end
+  end
+
+  describe "reverse_grapes" do
+    it "should always give a correct number of questions" do
+      answers = Quiz.reverse_grapes_question(20)
+      answers.size.should == 20
+    end
+  end
+
   describe "region_question" do
     it "defaults to 1 question" do
       Quiz.region_question.size == 1

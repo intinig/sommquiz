@@ -25,7 +25,8 @@ class Wine
     denominations = options[:denominations] || ["DOC", "DOCG"]
     easy_by_region = options[:easy_by_region]
     excluded_ids = options[:excluded_ids]
-    grapes_limit = options[:grapes_limit] || 6
+    upper_grapes_limit = options[:upper_grapes_limit] || 6
+    lower_grapes_limit = options[:lower_grapes_limit] || 0
 
     denominations = Denomination.all(:name => denominations)
     wines = all(:denomination => denominations, :id.not => excluded_ids)
@@ -42,9 +43,15 @@ class Wine
       end
     end
 
-    if grapes_limit != 0
+    if upper_grapes_limit != 0
       wines.delete_if do |wine|
-        wine.grapes.size > grapes_limit
+        wine.grapes.size > upper_grapes_limit
+      end
+    end
+
+    if lower_grapes_limit > 0
+      wines.delete_if do |wine|
+        wine.grapes.size < lower_grapes_limit
       end
     end
 
