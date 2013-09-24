@@ -21,6 +21,40 @@ class Wine
     Denomination.first(:name => "DOCG").wines.all(params)
   end
 
+  def self.random(n = 0, options = {})
+    denominations = options[:denominations] || ["DOC", "DOCG"]
+    easy_by_region = options[:easy_by_region]
+    excluded_ids = options[:excluded_ids]
+    grapes_limit = options[:grapes_limit] || 6
+
+    denominations = Denomination.all(:name => denominations)
+    wines = all(:denomination => denominations, :id.not => excluded_ids)
+
+    n = n > wines.count ? wines.count : n
+
+    wines = wines.sample(n) if n > 0
+
+    excluded_ids = wines.map {|w| w.id}
+
+    unless easy_by_region
+      wines.delete_if do |wine|
+        wine.name =~ /#{wine.region.name}/i
+      end
+    end
+
+    if grapes_limit != 0
+      wines.delete_if do |wine|
+        wine.grapes.size > grapes_limit
+      end
+    end
+
+    if wines.size < n
+      wines << random(n - wines.size, options.merge(:excluded_ids => excluded_ids))
+    end
+
+    wines.flatten
+  end
+
   def stripped_name
     name.gsub(denomination.name, "").strip
   end
@@ -32,4 +66,5 @@ class Wine
   def split_grapes
     structured_grapes.map{|g| g.name}
   end
+
 end

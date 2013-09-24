@@ -1,6 +1,5 @@
 require 'ap'
-require File.join(File.dirname(File.absolute_path(__FILE__)), "/models")
-
+require_relative 'models'
 module SommQuiz
   module Utilities
     def self.check_for_grapes

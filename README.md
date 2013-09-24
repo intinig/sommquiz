@@ -9,3 +9,8 @@ To make it run:
 Notes:
 
 1. problems with nokogri? NOKOGIRI_USE_SYSTEM_LIBRARIES=1 bundle install
+
+# TODO
+
+reverse questions: Che vino viene fatto con queste uve? Docg di questa regione?
+quali di queste uve non e' in questo vino?

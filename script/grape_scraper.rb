@@ -15,7 +15,7 @@ def fetch_grapes(source, css_id)
   grape_cluster = source.css(css_id)
   grape_cluster.first.parent.next_element.css("li").map {|e| e.content}.each do |g|
     grape = Grape.new :name => g
-    grape.save!
+    grape.save! if Grape.all(:name => g).empty?
   end
 end
 
