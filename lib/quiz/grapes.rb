@@ -23,7 +23,7 @@ module Quiz
     def build_reverse_grapes_question_with_wine(wine)
       correct_answer = Grape.all.select {|g| !wine.grapes.include?(g)}.sample.name
 
-      incorrect_answers = wine.grapes.map {|g| g.name}
+      incorrect_answers = wine.grapes.map {|g| g.name}.sample(3)
 
       build_question(
         "Quali di queste uve non viene utilizzata nella produzione del vino #{wine.name}?",
