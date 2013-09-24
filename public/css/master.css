@@ -154,7 +154,7 @@ body {
 
 .gradient, .startQuiz,
 .checkAnswer,
-.nextQuestion, .step1, .step2, .step3, .step4, .step5, .step6, .step7, .step8, .step9, .step10 {
+.nextQuestion, .step1, .step2, .step3, .step4, .step5, .step6, .step7, .step8, .step9, .step10, .step11, .step12, .step13, .step14, .step15, .step16, .step17, .step18, .step19, .step20 {
   background: #ba2b2f;
   background: -moz-linear-gradient(top, #ba2b2f 0%, #8e0c3a 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ba2b2f), color-stop(100%, #8e0c3a));
@@ -237,61 +237,121 @@ ol.questions, .quizResults {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5); }
 
 .step1 {
+  width: 5%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 10%; }
+  display: inline-block; }
 
 .step2 {
+  width: 10%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 20%; }
+  display: inline-block; }
 
 .step3 {
+  width: 15%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 30%; }
+  display: inline-block; }
 
 .step4 {
+  width: 20%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 40%; }
+  display: inline-block; }
 
 .step5 {
+  width: 25%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 50%; }
+  display: inline-block; }
 
 .step6 {
+  width: 30%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 60%; }
+  display: inline-block; }
 
 .step7 {
+  width: 35%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 70%; }
+  display: inline-block; }
 
 .step8 {
+  width: 40%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 80%; }
+  display: inline-block; }
 
 .step9 {
+  width: 45%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 90%; }
+  display: inline-block; }
 
 .step10 {
+  width: 50%;
   text-align: right;
   padding-right: 10px;
-  display: inline-block;
-  width: 100%; }
+  display: inline-block; }
+
+.step11 {
+  width: 55%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }
+
+.step12 {
+  width: 60%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }
+
+.step13 {
+  width: 65%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }
+
+.step14 {
+  width: 70%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }
+
+.step15 {
+  width: 75%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }
+
+.step16 {
+  width: 80%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }
+
+.step17 {
+  width: 85%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }
+
+.step18 {
+  width: 90%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }
+
+.step19 {
+  width: 95%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }
+
+.step20 {
+  width: 100%;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block; }

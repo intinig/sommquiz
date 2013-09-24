@@ -265,82 +265,12 @@ ol.questions, .quizResults {
   text-shadow: 0 1px 1px rgba(0,0,0,.5);
 }
 
-.step1 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 10%;
-}
-
-.step2 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 20%;
-}
-
-.step3 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 30%;
-}
-
-.step4 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 40%;
-}
-
-.step5 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 50%;
-}
-
-.step6 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 60%;
-}
-
-.step7 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 70%;
-}
-
-.step8 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 80%;
-}
-
-.step9 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 90%;
-}
-
-.step10 {
-  @extend .gradient;
-  text-align: right;
-  padding-right: 10px;
-  display: inline-block;
-  width: 100%;
+@for $i from 1 through 20 {
+  .step#{$i} { 
+    width: 5% * $i;
+    @extend .gradient;
+    text-align: right;
+    padding-right: 10px;
+    display: inline-block;     
+  }
 }
