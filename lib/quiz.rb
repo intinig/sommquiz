@@ -10,7 +10,7 @@ class Quiz
     denominations = options[:denominations] || ["DOC", "DOCG"]
     easy_by_region = options[:easy_by_region]
     excluded_ids = options[:excluded_ids]
-    grapes_limit = 6
+    grapes_limit = options[:grapes_limit] || 6
 
     denominations = Denomination.all(:name => denominations)
     wines = Wine.all(:denomination => denominations, :id.not => excluded_ids)
@@ -28,8 +28,8 @@ class Quiz
     end
 
     wines.delete_if do |wine|
-      wine.grapes.size > 5
-    end
+      wine.grapes.size > grapes_limit
+    end unless grapes_limit == 0
 
     if wines.size < n
       wines << sample_wines(n - wines.size, options.merge(:excluded_ids => excluded_ids))
