@@ -45,7 +45,7 @@ module Quiz
 
     def reverse_grapes_question(n = 1)
       wines = Wine.random(n, :denominations => ["DOCG"])
-      wines.select {|w| w.grapes.size > 4}
+      wines = wines.select {|w| w.grapes.size > 4}
       questions = []
       wines.each do |wine|
         questions << build_reverse_grapes_question_with_wine(wine)
