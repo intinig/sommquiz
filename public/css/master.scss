@@ -1,0 +1,346 @@
+/* QUIZ STYLES */
+/* Styles to prettify the quiz page */
+
+html {
+    background: #eee;
+}
+
+body {
+    width: 800px;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-top: none;
+    background: #fff;
+    padding: 20px;
+    font-family: Trebuchet, Arial,Helvetica,sans-serif;
+    font-size: 16px;
+    color: #353535;
+    line-height: 1.5em;
+}
+
+h1,h2,h3,h4,h5,h6 {font-weight: bold;}
+
+h1 {
+    font-size: 26px;
+    margin: 0 0 20px;
+    color: #0C4569;
+}
+h2 {
+    font-size: 22px;
+    margin: 15px 0;
+}
+h3 {
+    font-size: 18px;
+    margin: 15px 0 10px;
+}
+h4 {
+    font-size: 16px;
+    margin: 10px 0;
+}
+h5 {
+    font-size: 14px;
+    margin: 10px 0 5px;
+}
+h6 {
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+strong { font-weight: bold; }
+em { font-style: italic; }
+ul { list-style-type: circle; }
+ol { list-style-type: decimal; }
+ol li { list-style-type: decimal; margin-left: 20px; }
+
+.button {
+    float: left;
+    width: auto;
+    padding: 5px 15px;
+    color:#ffffff;
+    background-color:darkcyan;
+    border: 1px solid #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  text-decoration: none;
+}
+.button:hover {
+    background-color:darkslategray;
+}
+
+.startQuiz {
+    margin-top: 40px;
+}
+
+.tryAgain {
+    margin: 20px 0;
+}
+
+/* clearfix */
+.quizArea, .quizResults {
+    zoom: 1;
+}
+.quizArea:before, .quizArea:after, .quizResults:before, .quizResults:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    font-size: 0;
+}
+.quizArea:after, .quizResults:after {
+    clear: both;
+}
+
+.questionCount {
+    font-size: 14px;
+    font-style: italic;
+}
+.questionCount span {
+    font-weight: bold;
+}
+
+ol.questions {
+    margin-top: 20px;
+    margin-left: 0;
+}
+ol.questions li {
+    margin-left: 0;
+}
+
+ul.answers {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+ul.responses li {
+    margin: 10px 20px 20px;
+}
+ul.responses li p span {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+}
+ul.responses li.correct p span {
+    color: #6C9F2E;
+}ul.responses li.incorrect p span {
+    color: #B5121B;
+}
+
+.quizResults h3 {
+    margin: 0;
+}
+.quizResults h3 span {
+    font-weight: normal;
+    font-style: italic;
+}
+.quizResultsCopy {
+    clear: both;
+    margin-top: 20px;
+}
+
+// GENERAL ====================================================
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  background: url('../images/body-bgk.jpg');
+}
+
+body {
+  width: 940px;
+  border: none;
+  background-color: #fff;
+  background-color: rgba(255,255,255,.5);
+}
+
+// VARS AND MIXINS ============================================
+
+.gradient {
+  background: rgb(186,43,47);
+  background: -moz-linear-gradient(top,  rgba(186,43,47,1) 0%, rgba(142,12,58,1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(186,43,47,1)), color-stop(100%,rgba(142,12,58,1)));
+  background: -webkit-linear-gradient(top,  rgba(186,43,47,1) 0%,rgba(142,12,58,1) 100%);
+  background: -o-linear-gradient(top,  rgba(186,43,47,1) 0%,rgba(142,12,58,1) 100%);
+  background: -ms-linear-gradient(top,  rgba(186,43,47,1) 0%,rgba(142,12,58,1) 100%);
+  background: linear-gradient(to bottom,  rgba(186,43,47,1) 0%,rgba(142,12,58,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ba2b2f', endColorstr='#8e0c3a',GradientType=0 );
+
+  border-radius: 5px;
+}
+
+
+// HEAD =======================================================
+
+header {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+header #logo img {
+  width: 400px;
+}
+
+// BODY =======================================================
+
+.quizHeader p {
+  font-family: Georgia, serif;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden; 
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; 
+}
+
+.quizHeader p:before {
+  content: ""; 
+  position: absolute; 
+  z-index: 1; 
+  width: 96%;  
+  top: -10px; 
+  height: 10px; 
+  left: 2%; 
+  border-radius: 100px / 5px; 
+  box-shadow: 0 0 18px rgba(0,0,0,0.1); 
+}
+
+.quizHeader p:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 96%; 
+  bottom: -10px;
+  height: 10px;
+  left: 2%;
+  border-radius: 100px / 5px;
+  box-shadow: 0 0 18px rgba(0,0,0,0.1);
+}
+
+.startQuiz, 
+.checkAnswer,
+.nextQuestion {
+  @extend .gradient;
+
+  text-shadow: 0 2px 0 rgba(0,0,0,.4);
+}
+
+.startQuiz {
+  width: 100%;
+  padding: 20px;
+  margin-top: 70px;
+  text-align: center;
+}
+
+.startQuiz:hover,
+.checkAnswer:hover,
+.nextQuestion:hover {
+  background-color: #B60040;
+}
+
+ul.answers li input {
+  margin-right: 10px;
+}
+
+ul.responses li p span {
+  padding: 20px 0;
+}
+
+ol.questions, .quizResults {
+  padding: 20px;
+}
+
+/* Step count */
+
+.steps {
+  background-color: #eaeaea;
+  border-radius: 5px;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,.5);
+}
+
+.step1 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 10%;
+}
+
+.step2 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 20%;
+}
+
+.step3 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 30%;
+}
+
+.step4 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 40%;
+}
+
+.step5 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 50%;
+}
+
+.step6 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 60%;
+}
+
+.step7 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 70%;
+}
+
+.step8 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 80%;
+}
+
+.step9 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 90%;
+}
+
+.step10 {
+  @extend .gradient;
+  text-align: right;
+  padding-right: 10px;
+  display: inline-block;
+  width: 100%;
+}
