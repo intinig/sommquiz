@@ -16,7 +16,8 @@ $(function () {
         "level4":  "Bevitore di Tavernello",
         "level5":  "Astemio"
       },
-      "questions": q.questions
+      "questions": q.questions,
+      "tryAgainText": "Riprova"
     }
 }
 

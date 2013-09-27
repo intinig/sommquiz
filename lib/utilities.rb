@@ -45,5 +45,24 @@ module SommQuiz
 
       wines.size - new_wines.size
     end
+
+    def self.count_wines_with_grapes_in_their_name
+      wines = Wine.all(
+        :denomination => Denomination.all(:name => ["DOC", "DOCG"])
+        )
+
+      new_wines = wines.dup
+      wines.each do |w|
+        w.grapes.map{|g| g.name.downcase}.each do |grape|
+          if w.name =~ /#{grape}/i
+            new_wines.delete w
+            break
+          end
+        end
+      end
+
+      wines.size - new_wines.size
+    end
+
   end
 end

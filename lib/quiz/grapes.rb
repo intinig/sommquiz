@@ -35,7 +35,7 @@ module Quiz
     end
 
     def grapes_question(n = 1)
-      wines = Wine.random(n, :denominations => ["DOCG"])
+      wines = Wine.random(n, :denominations => ["DOCG"], :easy_by_region => false, :exclude_grape_wines => true)
       questions = []
       wines.each do |wine|
         questions << build_grapes_question_with_wine(wine)
@@ -44,7 +44,7 @@ module Quiz
     end
 
     def reverse_grapes_question(n = 1)
-      wines = Wine.random(n, :denominations => ["DOCG", "DOC"], :lower_grapes_limit => 3)
+      wines = Wine.random(n, :denominations => ["DOCG", "DOC"], :lower_grapes_limit => 3,:easy_by_region => false, :exclude_grape_wines => true)
       questions = []
       wines.each do |wine|
         questions << build_reverse_grapes_question_with_wine(wine)

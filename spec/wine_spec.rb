@@ -25,8 +25,14 @@ describe Wine do
 
     it "should exclude wines that contain a region name" do
       easy_wines = Wine.random(0, default_options(:denominations => nil))
-      complex_wines = Wine.random(0, default_options(:easy_by_region => false))
+      complex_wines = Wine.random(0, default_options(:easy_by_region => false, :denominations => nil))
       (easy_wines.size - complex_wines.size).should == SommQuiz::Utilities.count_wines_with_region_in_their_name
+    end
+
+    it "excludes wines that contain the name of the grape" do
+      easy_wines = Wine.random(0, default_options(:denominations => nil))
+      complex_wines = Wine.random(0, default_options(:exclude_grape_wines => true, :denominations => nil))
+      (easy_wines.size - complex_wines.size).should == SommQuiz::Utilities.count_wines_with_grapes_in_their_name
     end
 
     it "always gives a sufficient number of wines" do

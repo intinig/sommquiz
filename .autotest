@@ -1,2 +1,2 @@
 require 'autotest/fsevent'
-require 'autotest/growl'
+#require 'autotest/growl'

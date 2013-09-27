@@ -24,6 +24,7 @@ class Wine
   def self.random(n = 0, options = {})
     denominations = options[:denominations] || ["DOC", "DOCG"]
     easy_by_region = options[:easy_by_region]
+    exclude_grape_wines = options[:exclude_grape_wines]
     excluded_ids = options[:excluded_ids]
     upper_grapes_limit = options[:upper_grapes_limit] || 6
     lower_grapes_limit = options[:lower_grapes_limit] || 0
@@ -42,6 +43,20 @@ class Wine
         wine.name =~ /#{wine.region.name}/i
       end
     end
+
+    if exclude_grape_wines
+      new_wines = wines.dup
+      wines.each do |w|
+        w.grapes.map{|g| g.name.downcase}.each do |grape|
+          if w.name =~ /#{grape}/i
+            new_wines.delete w
+            break
+          end
+        end
+      end
+      wines = new_wines
+    end
+
 
     if upper_grapes_limit != 0
       wines.delete_if do |wine|
