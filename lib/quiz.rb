@@ -34,7 +34,8 @@ module Quiz
       :region_question,
       :reverse_region_question,
       :grapes_question,
-      :reverse_grapes_question
+      :reverse_grapes_question,
+      :reverse_wine_question
     ]
     questions = []
 

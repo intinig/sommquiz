@@ -34,8 +34,25 @@ module Quiz
         )
     end
 
+    def build_reverse_wine_question_with_wine(wine)
+      correct_answer = wine.name
+      question = wine.grapes.map {|g| g.name}.sort.join(", ")
+
+      wines = Wine.all(:name.not => wine.name, :denomination => wine.denomination)
+
+      incorrect_answers = wines.sample(3).map{|w| w.name}
+
+      build_question(
+        "Che vino può essere prodotto con #{question}?",
+        correct_answer,
+        incorrect_answers,
+        "<p><span>Corretto!</span></p>",
+        "<p><span>Sbagliato!</span> Il #{correct_answer} può essere prodotto con #{question}!</p>"
+        )
+    end
+
     def grapes_question(n = 1)
-      wines = Wine.random(n, :denominations => ["DOCG"], :easy_by_region => false, :exclude_grape_wines => true)
+      wines = Wine.random(n, :denominations => ["DOCG", "DOC"], :easy_by_region => false, :exclude_grape_wines => true)
       questions = []
       wines.each do |wine|
         questions << build_grapes_question_with_wine(wine)
@@ -50,6 +67,15 @@ module Quiz
       questions = []
       wines.each do |wine|
         questions << build_reverse_grapes_question_with_wine(wine)
+      end
+      questions
+    end
+
+    def reverse_wine_question_(n = 1)
+      wines = Wine.random(n, :denominations => ["DOCG", "DOC"], :lower_grapes_limit => 3,:easy_by_region => false, :exclude_grape_wines => true)
+      questions = []
+      wines.each do |wine|
+        questions << build_reverse_wine_question_with_wine(wine)
       end
       questions
     end
