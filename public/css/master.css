@@ -147,6 +147,7 @@ html {
   background: url("../images/body-bgk.jpg"); }
 
 body {
+  height: 100%;
   width: 940px;
   border: none;
   background-color: #fff;
@@ -355,3 +356,16 @@ ol.questions, .quizResults {
   text-align: right;
   padding-right: 10px;
   display: inline-block; }
+
+#spinner {
+  text-align: center; }
+  #spinner span {
+    display: inline-block;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-weight: bold; }
+  #spinner img {
+    display: block;
+    width: 300px;
+    border-radius: 100%;
+    margin: 0 auto; }
