@@ -23,6 +23,7 @@ $(function () {
 
   $.getJSON('/question', function(data) {
     setQuestion(data);
+    $('#spinner').remove();
     $('#slickQuiz').slickQuiz();
   })
 });
