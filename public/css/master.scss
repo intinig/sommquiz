@@ -153,6 +153,7 @@ html {
 }
 
 body {
+  height: 100%;
   width: 940px;
   border: none;
   background-color: #fff;
@@ -272,5 +273,25 @@ ol.questions, .quizResults {
     text-align: right;
     padding-right: 10px;
     display: inline-block;     
+  }
+}
+
+// Loading
+
+#spinner {
+  text-align: center;
+
+  span {
+    display: inline-block;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  img {
+    display: block;
+    width: 300px;
+    border-radius: 100%;
+    margin: 0 auto;
   }
 }
