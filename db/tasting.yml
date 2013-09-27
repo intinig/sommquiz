@@ -1,0 +1,147 @@
+---
+tasting:
+  visivo:
+    limpidezza:
+      - Velato
+      - Abbastanza limpido
+      - Limpido
+      - Cristallino
+      - Brillante
+    colore:
+      - Giallo verdolino
+      - Giallo paglierino
+      - Giallo dorato
+      - Giallo ambrato
+      - Rosa tenue
+      - Rosa cerasuolo
+      - Rosa chiaretto
+      - Rosso porpora
+      - Rosso rubino
+      - Rosso granato
+      - Rosso aranciato
+    consistenza:
+      - Fluido
+      - Poco consistente
+      - Abbastanza consistente
+      - Consistente
+      - Viscoso
+    effervescenza:
+      grana_bollicine:
+        - Grossolane
+        - Abbastanza fini
+        - Fini
+      numero_bollicine:
+        - Scarse
+        - Abbastanza numerose
+        - Numerose
+      persistenza_bollicine:
+        - Evanescenti
+        - Abbastanza persistenti
+        - Persistenti
+  olfattivo:
+    intensita:
+      - Carente
+      - Poco intenso
+      - Abbastanza intenso
+      - Intenso
+      - Molto intenso
+    complessita:
+      - Carente
+      - Poco complesso
+      - Abbastanza complesso
+      - Complesso
+      - Ampio
+    qualita:
+      - Comune
+      - Poco fine
+      - Abbastanza fine
+      - Fine
+      - Eccellente
+    descrizione:
+      - Aromatico
+      - Vinoso
+      - Floreale
+      - Fruttato
+      - Fragrante
+      - Erbaceo
+      - Minerale
+      - Speziato
+      - Etereo
+      - Franco
+  gusto_olfattivo:
+    morbidezza:
+      zuccheri:
+        - Secco
+        - Abboccato
+        - Amabile
+        - Dolce
+        - Stucchevole
+      alcoli:
+        - Leggero
+        - Poco caldo
+        - Abbastanza caldo
+        - Caldo
+        - Alcolico
+      policalcoli:
+        - Spigoloso
+        - Poco morbido
+        - Abbastanza morbido
+        - Morbido
+        - Pastoso
+    durezza:
+      acidi:
+        - Piatto
+        - Poco fresco
+        - Abbastanza fresco
+        - Fresco
+        - Acidulo
+      tannini:
+        - Molle
+        - Poco tannico
+        - Abbastanza tannico
+        - Tannico
+        - Astringente
+      sostanze_minerali:
+        - Scipito
+        - Poco sapido
+        - Abbastanza sapido
+        - Sapido
+        - Salato
+    struttura:
+      - Magro
+      - Debole
+      - Di corpo
+      - Robusto
+      - Pesante
+    equilibrio:
+      - Poco equilibrato
+      - Abbastanza equilibrato
+      - Equilibrato
+    intensita:
+      - Carente
+      - Poco intenso
+      - Abbastanza intenso
+      - Intenso
+      - Molto intenso
+    persistenza:
+      - Corto
+      - Poco persistente
+      - Abbastanza persistente
+      - Persistente
+      - Molto persistente
+    qualita:
+      - Comune
+      - Poco fine
+      - Abbastanza fine
+      - Fine
+      - Eccellente
+  stato_evolutivo:
+    - Immaturo
+    - Giovane
+    - Pronto
+    - Maturo
+    - Vecchio
+  armonia:
+    - Poco armonico
+    - Abbastanza armonico
+    - Armonico

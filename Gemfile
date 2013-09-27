@@ -5,11 +5,13 @@ gem 'nokogiri'
 gem 'awesome_print'
 gem 'data_mapper'
 gem 'sinatra'
+gem 'recursive-open-struct'
 
 group :production do
   gem 'pg'
   gem 'dm-postgres-adapter'
 end
+
 group :development, :test do
   gem 'sqlite3'
   gem 'dm-sqlite-adapter'
