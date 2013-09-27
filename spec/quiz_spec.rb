@@ -36,4 +36,16 @@ describe Quiz do
       Quiz.region_question.size == 1
     end
   end
+
+  describe "reverse region" do
+    it "does not pick regions with less than 3 docg" do
+      q = Quiz.reverse_region_question(21)
+      threshold_regions = Denomination.first(:name => "DOCG").wines.map {|w| w.region}.group_by {|y| y}.select {|k,v| v.size > 2}.count
+      q.size.should == threshold_regions # calcolato a mano
+    end
+  end
+
+  describe "reverse wine" do
+    it "does not give you Primitivo among the answers"
+  end
 end

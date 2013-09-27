@@ -71,7 +71,7 @@ module Quiz
       questions
     end
 
-    def reverse_wine_question_(n = 1)
+    def reverse_wine_question(n = 1)
       wines = Wine.random(n, :denominations => ["DOCG", "DOC"], :lower_grapes_limit => 3,:easy_by_region => false, :exclude_grape_wines => true)
       questions = []
       wines.each do |wine|

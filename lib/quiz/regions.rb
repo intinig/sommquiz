@@ -16,7 +16,9 @@ module Quiz
     end
 
     def reverse_region_question(n = 1)
-      regions = Region.all.sample(n)
+      regions = Region.all.select do |r|
+        r.wines.count(:denomination => Denomination.first(:name => "DOCG")) > 2
+      end.sample(n)
       questions = []
       regions.each do |region|
         questions << build_reverse_region_question_with_region(region)
@@ -39,5 +41,6 @@ module Quiz
       questions
     end
 
+    # quali di queste regioni ha n docg?
   end
 end
