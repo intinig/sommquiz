@@ -43,6 +43,8 @@ module Quiz
       questions
     end
 
+    # che vino si fa con queste uve
+
     def reverse_grapes_question(n = 1)
       wines = Wine.random(n, :denominations => ["DOCG", "DOC"], :lower_grapes_limit => 3,:easy_by_region => false, :exclude_grape_wines => true)
       questions = []

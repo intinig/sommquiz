@@ -2,7 +2,7 @@
 module Quiz
   module Regions
     def build_reverse_region_question_with_region(region)
-      denominations = Denomination.all :name => ["DOC", "DOCG", "DOP"]
+      denominations = Denomination.all :name => ["DOCG"]
       incorrect_answers = Wine.all(:region => region, :denomination => denominations).sample(3).map{|w| w.name}
       correct_answer = Wine.all(:region.not => region, :denomination => denominations).sample(1).map{|w| w.name}.first
 
@@ -25,7 +25,7 @@ module Quiz
     end
 
     def region_question(n = 1)
-      wines = Wine.random(n, :denominations => ["DOCG", "DOC", "DOP"])
+      wines = Wine.random(n, :denominations => ["DOCG"])
       questions = []
       wines.each do |wine|
         questions << build_question(
