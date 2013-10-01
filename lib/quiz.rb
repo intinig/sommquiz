@@ -14,6 +14,11 @@ module Quiz
   extend Regions
   extend Grapes
 
+  # def self.build_question(options = {})
+  #   question = options.delete :question
+  #   correct_answer = options.delete :correct_answer
+  # end
+
   def self.build_question(question, correct_answer, incorrect_answers, correct_message, incorrect_message)
     results = incorrect_answers.map do |answer|
       {"option" => answer, "correct" => false}

@@ -44,8 +44,4 @@ describe Quiz do
       q.size.should == threshold_regions # calcolato a mano
     end
   end
-
-  describe "reverse wine" do
-    it "does not give you Primitivo among the answers"
-  end
 end

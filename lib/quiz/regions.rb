@@ -3,8 +3,9 @@ module Quiz
   module Regions
     def build_reverse_region_question_with_region(region)
       denominations = Denomination.all :name => ["DOCG"]
+      picolit = Wine.first :name => "Colli Orientali del Friuli Picolit DOCG"
       incorrect_answers = Wine.all(:region => region, :denomination => denominations).sample(3).map{|w| w.name}
-      correct_answer = Wine.all(:region.not => region, :denomination => denominations).sample(1).map{|w| w.name}.first
+      correct_answer = Wine.all(:region.not => region, :denomination => denominations, :id.not => picolit.id).sample(1).map{|w| w.name}.first
 
       build_question(
         "Quali di questi vini non appartiene alla regione #{region.name}?",

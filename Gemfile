@@ -6,6 +6,8 @@ gem 'awesome_print'
 gem 'data_mapper'
 gem 'sinatra'
 gem 'recursive-open-struct'
+gem 'rake'
+gem 'activesupport'
 
 group :production do
   gem 'pg'
