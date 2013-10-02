@@ -1,15 +1,11 @@
 require 'json'
 require 'sinatra'
 
-require File.join(File.dirname(__FILE__), "/lib/quiz")
-
-# tipi di domande: doc o docg?
-# regioni
-#
+require __dir__ + "/lib/somm_quiz"
 
 get '/question' do
   content_type :json
-  {"questions" => Quiz.random_question(20)}.to_json
+  {"questions" => SommQuiz::Quiz.new(20).questions}.to_json
 end
 
 get '/' do

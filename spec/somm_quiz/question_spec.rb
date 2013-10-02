@@ -1,28 +1,29 @@
 require __dir__ + "/../../lib/somm_quiz"
 
 describe SommQuiz::Question do
+  let(:dummy_question) do
+    {
+      :subject => "Come ti chiami?",
+      :answers => [
+        {
+            :option => "Giovanni", :correct => true
+        },
+        {
+          :option => "Enzo", :correct => false
+        }
+      ],
+      :correct => "Bravo, ti chiami proprio Giovanni",
+      :incorrect => "Eh no, non ti chiami Giovanni"
+    }
+  end
+
+  subject { SommQuiz::Question.new dummy_question }
+
+
   describe "initialize" do
     def check_for_error(exception)
       expect(Proc.new{subject}).to raise_error(exception)
     end
-
-    let(:dummy_question) do
-      {
-        :subject => "Come ti chiami?",
-        :answers => [
-          {
-            :option => "Giovanni", :correct => true
-          },
-          {
-            :option => "Enzo", :correct => false
-          }
-        ],
-        :correct => "Bravo, ti chiami proprio Giovanni",
-        :incorrect => "Eh no, non ti chiami Giovanni"
-      }
-    end
-
-    subject { SommQuiz::Question.new dummy_question }
 
     it "requires a subject" do
       dummy_question.delete :subject
@@ -71,6 +72,12 @@ describe SommQuiz::Question do
     it "requires an incorrect message" do
       dummy_question.delete :incorrect
       check_for_error(SommQuiz::MissingIncorrectMessageError)
+    end
+  end
+
+  describe "to_json" do
+    it "does not crash" do
+      expect(Proc.new { subject.to_json }).not_to raise_error
     end
   end
 end

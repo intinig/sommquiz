@@ -1,3 +1,5 @@
+require 'json'
+
 module SommQuiz
   class NoSubjectError < Exception
   end
@@ -39,6 +41,15 @@ module SommQuiz
 
       @incorrect = options.delete(:incorrect) || raise(MissingIncorrectMessageError)
       @incorrect = @incorrect.to_s
+    end
+
+    def to_json(options = {})
+      {
+        "q" => @subject,
+        "a" => @answers,
+        "correct" => @correct,
+        "incorrect" => @incorrect
+      }.to_json
     end
   end
 end

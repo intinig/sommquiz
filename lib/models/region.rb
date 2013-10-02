@@ -4,7 +4,7 @@ class Region
   include DataMapper::Resource
 
   property :id, Serial
-  property :name, String
+  property :name, String, :index => true
 
   has n, :wines
 

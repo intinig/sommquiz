@@ -10,3 +10,4 @@ DataMapper::Logger.new(File.join(File.dirname(__FILE__), "/../log/debug.log"), :
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/db/denominations.sqlite3")
 DataMapper.finalize
+DataMapper.auto_upgrade!
