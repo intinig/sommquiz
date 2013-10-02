@@ -14,6 +14,14 @@ describe SommQuiz::Quiz do
       end
     end
 
-    it "selects a type of question for each topic"
+    it "selects a type of question for each topic" do
+      expect(subject.questions.size).to eq(subject.topics.size)
+    end
+
+    it "fills @questions with real questions" do
+      subject.questions.each do |question|
+        expect(question).to be_a(SommQuiz::Question)
+      end
+    end
   end
 end

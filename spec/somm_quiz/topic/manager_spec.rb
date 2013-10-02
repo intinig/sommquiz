@@ -10,7 +10,7 @@ describe SommQuiz::Topic::Manager do
 
   describe "random" do
     subject { SommQuiz::Topic::Manager.random(5) }
-    let(:all_topics) { SommQuiz::Topic::Manager.random(16) }
+    let(:all_topics) { SommQuiz::Topic::Manager.random }
 
     it "returns an array of topics" do
       subject.each {|topic| expect(topic).to be_a(SommQuiz::Topic::Base)}
@@ -21,13 +21,14 @@ describe SommQuiz::Topic::Manager do
     end
 
     it "selects unique topics" do
-      expect(all_topics.size).to eql(16)
-      # expected = all_topics.map {|i| "#{i.class}#{i.name}"}
-      # actual = expected.uniq
-      # ap expected.sort
-      # ap all_topics
-      # expect(actual - expected).to be_empty
-      # expect(actual.size).to eql(expected.size)
+      expected = all_topics.map {|i| "#{i.class}#{i.name}"}
+      actual = expected.uniq
+      expect(actual - expected).to be_empty
+      expect(actual.size).to eql(expected.size)
+    end
+
+    it "returns everything you have if n is 0" do
+      expect(all_topics.size).to eq(SommQuiz::Topic::Manager.count_available_subjects)
     end
   end
 

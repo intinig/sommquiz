@@ -19,7 +19,8 @@ module SommQuiz
         subjects.uniq {|e| "#{e.class}#{e.name}"}
       end
 
-      def self.random(n = 10000, options = {})
+      def self.random(n = 0, options = {})
+        n = count_available_subjects if n == 0
         n = n > count_available_subjects ? count_available_subjects : n
 
         subjects = []

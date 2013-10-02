@@ -12,6 +12,23 @@ module SommQuiz
         @data = Object::Region.all(:name.not => exclude).sample
         @name = @data.name
       end
+
+      def ask
+        Question.new(
+          :subject => "x",
+          :answers  => [
+            {
+              :option => "Enzo",
+              :correct => "True"
+            },
+            { :option => "Ronald",
+              :correct => "McDonald"
+            }
+          ],
+          :correct => "Ciao",
+          :incorrect => "Mamma",
+          )
+      end
     end
   end
 end

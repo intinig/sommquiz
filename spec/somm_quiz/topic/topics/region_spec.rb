@@ -21,4 +21,12 @@ describe SommQuiz::Topic::Region do
       expect(SommQuiz::Topic::Region.new(:exclude => regions).name).to eq("Puglia")
     end
   end
+
+  describe "ask" do
+    subject { SommQuiz::Topic::Region.new.ask }
+
+    it "returns a Question" do
+      expect(subject).to be_a(SommQuiz::Question)
+    end
+  end
 end
