@@ -2,6 +2,9 @@
 require __dir__ + "/../../../../lib/models"
 require __dir__ + "/region/which_wine"
 require __dir__ + "/region/which_wine_not"
+require __dir__ + "/region/which_grape"
+require __dir__ + "/region/which_grape_not"
+require __dir__ + "/region/grapes"
 require __dir__ + "/region/dummy"
 
 module SommQuiz
@@ -9,6 +12,9 @@ module SommQuiz
     class Region < Base
       include RegionExtensions::WhichWine
       include RegionExtensions::WhichWineNot
+      include RegionExtensions::WhichGrape
+      include RegionExtensions::WhichGrapeNot
+      include RegionExtensions::Grapes
       include RegionExtensions::Dummy
 
       def denominations
@@ -30,7 +36,7 @@ module SommQuiz
       end
 
       def question_types
-        types = []
+        types = ['which_grape', 'which_grape_not', 'grapes']
         types << 'which_wine' unless excluded_regions_from_which_wine.include?(name)
         types << 'which_wine_not' unless excluded_regions_from_which_wine_not.include?(name)
         types
@@ -45,7 +51,7 @@ module SommQuiz
       end
 
       def generate_answers_for(question_type)
-        send("#{question_type}_answers")
+        send("#{question_type}_answers").shuffle
       end
 
       def generate_correct_message_for(question_type)
@@ -63,7 +69,8 @@ module SommQuiz
           :subject => pick_subject(question_type),
           :answers  => generate_answers_for(question_type),
           :correct => generate_correct_message_for(question_type),
-          :incorrect => generate_incorrect_message_for(question_type)
+          :incorrect => generate_incorrect_message_for(question_type),
+          :select_any => true
           )
       end
     end

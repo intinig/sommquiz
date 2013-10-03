@@ -19,18 +19,8 @@ quali di queste uve non e' in questo vino?
 
 
 Target : Vitigno
-       In che regione
-       In che regione non
-
-       Che vino
-       Che vino non
-
-Target : Regione
-       Nota: no regioni con i nomi dei vitigni
-       Nota: no regioni con i nomi dei vini
-       Che vitigno
-       Che vitigno non
-       10 vitigni
+ In che regione
+ In che regione non
 
        Che vino
        Che vino non

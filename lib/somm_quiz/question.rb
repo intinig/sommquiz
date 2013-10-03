@@ -26,9 +26,9 @@ module SommQuiz
       @subject = options.delete(:subject) || raise(NoSubjectError)
       @subject = @subject.to_s
 
-      @answers = options.delete(:answers) || raise(NoAnswersError)
-      raise(NoAnswersError) unless @answers.respond_to?(:to_ary)
-      raise(NoAnswersError) unless @answers.size > 1
+      @answers = options.delete(:answers) || raise(NoAnswersError, options.inspect)
+      raise(NoAnswersError, options.inspect) unless @answers.respond_to?(:to_ary)
+      raise(NoAnswersError, options.inspect) unless @answers.size > 1
 
       @answers.each do |answer|
         raise MalformedAnswerError unless (answer.has_key?(:option) && answer.has_key?(:correct))
@@ -41,6 +41,8 @@ module SommQuiz
 
       @incorrect = options.delete(:incorrect) || raise(MissingIncorrectMessageError)
       @incorrect = @incorrect.to_s
+
+      @select_any = options.delete(:select_any)
     end
 
     def to_json(options = {})
@@ -48,7 +50,8 @@ module SommQuiz
         "q" => @subject,
         "a" => @answers,
         "correct" => @correct,
-        "incorrect" => @incorrect
+        "incorrect" => @incorrect,
+        "select_any" => @select_any
       }.to_json
     end
   end

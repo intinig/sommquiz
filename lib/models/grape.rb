@@ -7,4 +7,5 @@ class Grape
   property :name, String, :length => 255, :index => true
 
   has n, :wines, :through => Resource
+  has n, :regions, :through => :wines
 end

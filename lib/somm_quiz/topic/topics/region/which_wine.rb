@@ -28,10 +28,14 @@ module SommQuiz
         end
 
         def which_wine_fetch_incorrect
-          Wine.all(
-            :region.not => @data,
-            :denomination => denominations
+          if @incorrect_answer
+            @incorrect_answer
+          else
+            Wine.all(
+              :region.not => @data,
+              :denomination => denominations
             ).sample(4).map {|w| w.name}
+          end
         end
 
         def which_wine_answers

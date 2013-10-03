@@ -9,4 +9,5 @@ class Region
   has n, :wines
 
   has n, :denominations, :through => :wines
+  has n, :grapes, :through => :wines
 end

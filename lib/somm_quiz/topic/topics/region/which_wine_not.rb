@@ -35,7 +35,11 @@ module SommQuiz
         end
 
         def which_wine_not_fetch_incorrect
-          [@data.wines(:denomination => denominations).sample.name]
+          if @incorrect_answer
+            @incorrect_answer
+          else
+            [@data.wines(:denomination => denominations).sample.name]
+          end
         end
 
         def which_wine_not_answers
