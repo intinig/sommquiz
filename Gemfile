@@ -21,4 +21,5 @@ group :development, :test do
   gem 'ZenTest'
   gem 'autotest-growl'
   gem 'autotest-fsevent'
+  gem 'ruby-prof'
 end
