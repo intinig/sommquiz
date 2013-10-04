@@ -1,5 +1,5 @@
+require __dir__ + "/../../../../spec_helper"
 require __dir__ + "/../../../../../lib/somm_quiz"
-require __dir__ + "/../../../../../lib/models"
 
 describe SommQuiz::Topic::RegionExtensions::WhichGrapeNot do
   subject { SommQuiz::Topic::Region.new }

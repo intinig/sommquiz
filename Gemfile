@@ -8,6 +8,7 @@ gem 'sinatra'
 gem 'recursive-open-struct'
 gem 'rake'
 gem 'activesupport'
+gem 'redis-rb'
 
 group :production do
   gem 'pg'

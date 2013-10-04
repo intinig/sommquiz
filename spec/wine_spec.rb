@@ -1,3 +1,4 @@
+require __dir__ + "/spec_helper"
 require_relative '../lib/models'
 require_relative '../lib/utilities'
 
