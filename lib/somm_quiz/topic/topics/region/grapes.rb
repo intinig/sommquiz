@@ -4,21 +4,11 @@ module SommQuiz
     module RegionExtensions
       module Grapes
         def grapes_fetch_correct
-          if @correct_answer
-            @correct_answer
-          else
-            @correct_answer = @data.grapes.sample(5).map {|w| w.name}
-          end
+          @correct_answer ||= Grape.sample_regional(name, 5)
         end
 
         def grapes_fetch_incorrect
-          if @incorrect_answer
-            @incorrect_answer
-          else
-            Grape.all.select do |grape|
-              !grape.regions.include?(@data)
-            end.sample(5).map {|w| w.name}
-          end
+          @incorrect_answer ||= Grape.sample_not_in_region(name, 5)
         end
 
         def grapes_answers

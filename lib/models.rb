@@ -1,5 +1,6 @@
 require 'data_mapper'
 require 'redis'
+require __dir__ + "/somm_quiz/redis_persistence"
 
 MODELS_PATH = File.join(File.dirname(__FILE__), "/models")
 
@@ -13,8 +14,16 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/db/denomi
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-if ENV['REDIS_HOST']
-  REDIS = Redis.new(:host => ENV['REDIS_HOST'], :port => ENV['REDIS_PORT'])
+if ENV['REDISTOGO_URL']
+  uri = URI.parse(ENV["REDISTOGO_URL"])
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :user => uri.user, :password => uri.password)
 else
-  REDIS = Redis.new
+  if ENV['REDIS_HOST']
+    REDIS = Redis.new(:host => ENV['REDIS_HOST'], :port => ENV['REDIS_PORT'])
+  else
+    REDIS = Redis.new
+  end
 end
+
+Wine.seed_wines unless REDIS.scard("denomination:all:wines").to_i == 442
+Region.seed_regions unless REDIS.scard("regions").to_i == 20

@@ -3,45 +3,67 @@ require_relative '../lib/models'
 require_relative '../lib/utilities'
 
 describe Wine do
-  # describe "random" do
-  #   def default_options(options = {})
-  #     {
-  #       :easy_by_region => true,
-  #       :denominations => ["DOC", "DOCG", "DOP", "IGP"],
-  #       :upper_grapes_limit => 0,
-  #       :lower_grapes_limit => 0
-  #     }.merge(options)
-  #   end
-  #   it "does not bomb out if you ask more wines than possible" do
-  #     Wine.random(100000, default_options).size.should == Wine.count
-  #   end
+  describe "count_with_grapes" do
+    it "returns a number" do
+      expect(Wine.count_with_grapes.to_i).to eq(Wine.count_with_grapes)
+    end
 
-  #   it "gives everything if you tell it to return 0" do
-  #     Wine.random(0, default_options).size.should == Wine.count
-  #   end
+    it "returns a number greater than 0" do
+      expect(Wine.count_with_grapes).to be > 0
+    end
+  end
 
-  #   it "gives only DOC and DOCG wines by default" do
-  #     Wine.random(0, default_options(:denominations => nil)).size.should == Wine.count(:denomination => Denomination.all(:name => ["DOC", "DOCG"]))
-  #   end
+  describe "has_grapes_in_name?" do
+    let(:montepulciano) { Wine.first :name => "Montepulciano d'Abruzzo DOC"}
+    let(:chianti) { Wine.first :name => "Chianti DOCG"}
 
-  #   it "should exclude wines that contain a region name" do
-  #     easy_wines = Wine.random(0, default_options(:denominations => nil))
-  #     complex_wines = Wine.random(0, default_options(:easy_by_region => false, :denominations => nil))
-  #     (easy_wines.size - complex_wines.size).should == SommQuiz::Utilities.count_wines_with_region_in_their_name
-  #   end
+    it "returns true if wine has grapes in name" do
+      ActiveSupport::Deprecation.silence do
+        expect(montepulciano.has_grapes_in_name?).to be_true
+      end
+    end
 
-  #   it "excludes wines that contain the name of the grape" do
-  #     easy_wines = Wine.random(0, default_options(:denominations => nil))
-  #     complex_wines = Wine.random(0, default_options(:exclude_grape_wines => true, :denominations => nil))
-  #     (easy_wines.size - complex_wines.size).should == SommQuiz::Utilities.count_wines_with_grapes_in_their_name
-  #   end
+    it "returns false if wine doesn't have grape in name" do
+      ActiveSupport::Deprecation.silence do
+        expect(chianti.has_grapes_in_name?).not_to be_true
+      end
+    end
+  end
 
-  #   it "always gives a sufficient number of wines" do
-  #     wines = Wine.random(20,
-  #       :denominations => ["DOCG", "DOC"],
-  #       :lower_grapes_limit => 3
-  #       )
-  #     wines.size.should == 20
-  #   end
-  # end
+  describe "sample_outside_region" do
+    subject { Wine.sample_outside_region("Calabria") }
+
+    it "returns an array" do
+      expect(Proc.new { subject.to_ary }).not_to raise_error
+    end
+
+    it "returns an array of wine names" do
+      subject.each do |w|
+        expect(Wine.get_all).to include(w)
+      end
+    end
+  end
+
+  describe "get_all" do
+    subject { Wine.get_all }
+    let(:all_wine_names) { Wine.all.map {|w| w.name}}
+
+    it "returns an array" do
+      expect(Proc.new { subject.to_ary }).not_to raise_error
+    end
+
+    it "has all wines inside it" do
+      ActiveSupport::Deprecation.silence do
+        subject.each do |w|
+          expect(all_wine_names).to include(w)
+        end
+      end
+    end
+  end
+
+  it "should set a region on every wine" do
+    Wine.get_all.each do |w|
+      expect(Wine.get_region(w)).not_to be_nil
+    end
+  end
 end

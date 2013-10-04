@@ -2,6 +2,7 @@ require 'data_mapper'
 
 class Wine
   include DataMapper::Resource
+  include SommQuiz::RedisPersistence
 
   property :id, Serial
   property :name, String, :length => 255, :index => true
@@ -13,69 +14,65 @@ class Wine
 
   has n, :grapes, :through => Resource
 
-  def self.doc(params = {})
-    Denomination.first(:name => "DOC").wines.all(params)
+  def self.seed_wines
+    ActiveSupport::Deprecation.silence do
+      Wine.all.each do |wine|
+        REDIS.sadd "denomination:all:wines", wine.name
+        REDIS.sadd "denomination:#{wine.denomination.name}:wines", wine.name
+        REDIS.set "wine:#{wine.name}:denomination", wine.denomination.name
+
+        REDIS.sadd "region:#{wine.region.name}:all:wines", wine.name
+        REDIS.sadd "region:#{wine.region.name}:#{wine.denomination.name}:wines", wine.name
+        REDIS.sadd "denomination:#{wine.denomination.name}:regions", wine.region.name
+        REDIS.sadd "denomination:all:regions", wine.region.name
+        REDIS.set "wine:#{wine.name}:region", wine.region.name
+
+        Region.all(:id.not => wine.region.id).each do |region|
+          REDIS.sadd "region:#{region.name}:all:wines:outside", wine.name
+          REDIS.sadd "region:#{region.name}:#{wine.denomination.name}:wines:outside", wine.name
+        end
+
+        wine.grapes.map{|g| g.name.downcase}.each do |grape|
+          if wine.name =~ /#{grape}/i
+            REDIS.sadd "wines:with_grapes:all", wine.name
+            REDIS.sadd "wines:with_grapes:#{wine.denomination.name}", wine.name
+          end
+
+          REDIS.sadd "wine:#{wine.name}:grapes", grape.capitalize
+          REDIS.sadd "region:#{wine.region.name}:grapes", grape.capitalize
+          REDIS.sadd "grape:#{grape}:wines", wine.name
+          REDIS.sadd "grape:#{grape}:regions", wine.region.name
+          REDIS.sadd "denomination:#{wine.denomination.name}:grapes", grape.capitalize
+          REDIS.sadd "denomination:all:grapes", grape.capitalize
+          REDIS.sadd "grape:#{grape}:denominations", wine.denomination.name
+        end
+      end
+    end
   end
 
-  def self.docg(params = {})
-    Denomination.first(:name => "DOCG").wines.all(params)
+  def self.count_with_grapes(denomination = "DOCG")
+    REDIS.scard "wines:with_grapes:#{denomination}"
   end
 
-  # def self.random(n = 0, options = {})
-  #   denominations = options[:denominations] || ["DOC", "DOCG"]
-  #   easy_by_region = options[:easy_by_region]
-  #   exclude_grape_wines = options[:exclude_grape_wines]
-  #   excluded_ids = options[:excluded_ids]
-  #   upper_grapes_limit = options[:upper_grapes_limit] || 6
-  #   lower_grapes_limit = options[:lower_grapes_limit] || 0
+  def self.sample_outside_region(region, qty = 1, denomination = "DOCG")
+    REDIS.srandmember "region:#{region}:#{denomination}:wines:outside", qty
+  end
 
-  #   denominations = Denomination.all(:name => denominations)
-  #   wines = all(:denomination => denominations, :id.not => excluded_ids)
+  def self.sample_regional_wines(region, qty = 1, denomination = "DOCG")
+    REDIS.srandmember "region:#{region}:#{denomination}:wines", qty
+  end
 
-  #   n = n > wines.count ? wines.count : n
+  def self.get_all(denomination = "DOCG")
+    REDIS.smembers "denomination:#{denomination}:wines"
+  end
 
-  #   wines = wines.sample(n) if n > 0
+  def self.get_region(wine)
+    REDIS.get "wine:#{wine}:region"
+  end
 
-  #   excluded_ids = wines.map {|w| w.id}
-
-  #   unless easy_by_region
-  #     wines.delete_if do |wine|
-  #       wine.name =~ /#{wine.region.name}/i
-  #     end
-  #   end
-
-  #   if exclude_grape_wines
-  #     new_wines = wines.dup
-  #     wines.each do |w|
-  #       w.grapes.map{|g| g.name.downcase}.each do |grape|
-  #         if w.name =~ /#{grape}/i
-  #           new_wines.delete w
-  #           break
-  #         end
-  #       end
-  #     end
-  #     wines = new_wines
-  #   end
-
-
-  #   if upper_grapes_limit != 0
-  #     wines.delete_if do |wine|
-  #       wine.grapes.size > upper_grapes_limit
-  #     end
-  #   end
-
-  #   if lower_grapes_limit > 0
-  #     wines.delete_if do |wine|
-  #       wine.grapes.size < lower_grapes_limit
-  #     end
-  #   end
-
-  #   if wines.size < n
-  #     wines << random(n - wines.size, options.merge(:excluded_ids => excluded_ids))
-  #   end
-
-  #   wines.flatten
-  # end
+  def self.exists?(wine, denomination = "DOCG")
+    REDIS.sismember("denomination:#{denomination}:wines", wine)
+  end
 
   def stripped_name
     name.gsub(denomination.name, "").strip
@@ -89,4 +86,8 @@ class Wine
     structured_grapes.map{|g| g.name}
   end
 
+
+  def has_grapes_in_name?
+    REDIS.sismember "wines:with_grapes:all", name
+  end
 end

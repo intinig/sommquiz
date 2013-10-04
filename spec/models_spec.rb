@@ -6,8 +6,4 @@ describe "General features" do
     REDIS.set "foo", "bar"
     expect(REDIS.get("foo")).to eq("bar")
   end
-
-  it "doesn't keep redis in memory during tests" do
-    expect(REDIS.get("foo")).to be_nil
-  end
 end

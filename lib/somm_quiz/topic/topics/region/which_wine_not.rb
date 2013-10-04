@@ -22,24 +22,13 @@ module SommQuiz
         end
 
         def which_wine_not_fetch_correct
-          if @correct_answer
-            @correct_answer
-          else
-            wine = Wine.all(
-              :region.not => @data,
-              :denomination => denominations
-              ).sample
-            @original_region = wine.region.name
-            wine.name
-          end
+          @correct_answer ||= Wine.sample_outside_region(name)
+          @original_region ||= Wine.get_region(@correct_answer)
+          @correct_answer.first
         end
 
         def which_wine_not_fetch_incorrect
-          if @incorrect_answer
-            @incorrect_answer
-          else
-            [@data.wines(:denomination => denominations).sample.name]
-          end
+          @incorrect_answer ||= [Wine.sample_regional_wines(name)]
         end
 
         def which_wine_not_answers

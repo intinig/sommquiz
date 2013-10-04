@@ -18,17 +18,16 @@ module SommQuiz
       include RegionExtensions::Dummy
 
       def denominations
-        Denomination.all :name => "DOCG"
+        "DOCG"
       end
 
       def self.availability
-        Object::Region.count
+        Object::Region.get_count
       end
 
       def initialize(options = {})
-        exclude = options[:exclude]
-        @data = Object::Region.all(:name.not => exclude).sample
-        @name = @data.name
+        exclude = options[:exclude] || []
+        @name = Object::Region.get_random(exclude)
       end
 
       def pick_subject(question_type)

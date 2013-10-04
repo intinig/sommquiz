@@ -2,10 +2,14 @@ ENV['REDIS_HOST'] = "127.0.0.1"
 ENV['REDIS_PORT'] = "6380"
 
 RSpec.configure do |config|
-  config.before(:all) {}
-  config.before(:each) {
-    REDIS.flushdb
+  config.fail_fast = true
+  config.before(:all) {
+    # Wine.seed_wines unless REDIS.scard("denomination:all:wines").to_i == 443
+    # Region.seed_regions unless REDIS.scard("regions").to_i == 20
   }
-  config.after(:all) {}
+  config.before(:each) {}
+  config.after(:all) {
+    # REDIS.flushdb
+  }
   config.after(:each) {}
 end

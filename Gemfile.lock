@@ -85,6 +85,7 @@ GEM
       rack
     rake (10.1.0)
     recursive-open-struct (0.4.4)
+    redis (3.0.4)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -124,6 +125,7 @@ DEPENDENCIES
   pg
   rake
   recursive-open-struct
+  redis
   rspec
   ruby-prof
   sinatra

@@ -72,7 +72,7 @@ describe SommQuiz::Topic::Manager do
 
     describe "unique_subjects" do
       it "filters out unwanted subjects" do
-        region_names = Region.all.map {|r| r.name}
+        region_names = Object::Region.get_all
         region_names.delete "Puglia"
 
         first_element = SommQuiz::Topic::Region.new :exclude => region_names

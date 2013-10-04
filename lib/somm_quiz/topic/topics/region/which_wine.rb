@@ -15,26 +15,14 @@ module SommQuiz
         end
 
         def which_wine_fetch_correct
-          if @correct_answer
-            @correct_answer
-          else
-            wines = @data.wines(:denomination => denominations)
-            if wines.empty?
-              raise "[BUG] Fixme: #{name}"
-            else
-              @correct_answer = wines.sample.name
-            end
-          end
+          @correct_answer ||= Wine.sample_regional_wines(@name).first
         end
 
         def which_wine_fetch_incorrect
           if @incorrect_answer
             @incorrect_answer
           else
-            Wine.all(
-              :region.not => @data,
-              :denomination => denominations
-            ).sample(4).map {|w| w.name}
+            Wine.sample_outside_region(name, 4)
           end
         end
 
