@@ -1,5 +1,4 @@
 require 'data_mapper'
-require 'active_support/deprecation'
 
 class Grape
   include DataMapper::Resource

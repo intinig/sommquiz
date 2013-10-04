@@ -1,3 +1,5 @@
+require 'active_support/deprecation'
+
 module SommQuiz
   module RedisPersistence
     def self.included(base)
