@@ -18,12 +18,11 @@ module SommQuiz
         end
 
         def which_wine_not_original_region
-          @original_region
+          @original_region ||= Wine.get_region(which_wine_not_fetch_correct)
         end
 
         def which_wine_not_fetch_correct
           @correct_answer ||= Wine.sample_outside_region(name)
-          @original_region ||= Wine.get_region(@correct_answer)
           @correct_answer.first
         end
 
